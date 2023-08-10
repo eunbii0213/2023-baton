@@ -10,10 +10,14 @@ import jakarta.persistence.OneToOne;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import touch.baton.domain.common.BaseEntity;
 import touch.baton.domain.common.vo.Introduction;
 import touch.baton.domain.member.Member;
 import touch.baton.domain.runner.exception.RunnerDomainException;
+import touch.baton.domain.technicaltag.RunnerTechnicalTag;
+import touch.baton.domain.technicaltag.RunnerTechnicalTags;
+import touch.baton.domain.technicaltag.SupporterTechnicalTags;
 
 import java.util.Objects;
 
@@ -22,6 +26,7 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 import static lombok.AccessLevel.PROTECTED;
 
 @Getter
+@Setter
 @NoArgsConstructor(access = PROTECTED)
 @Entity
 public class Runner extends BaseEntity {
@@ -36,6 +41,10 @@ public class Runner extends BaseEntity {
     @OneToOne(fetch = LAZY)
     @JoinColumn(name = "member_id", foreignKey = @ForeignKey(name = "fk_runner_to_member"), nullable = false)
     private Member member;
+
+    @Embedded
+    private RunnerTechnicalTags runnerTechnicalTags;
+
 
     @Builder
     private Runner( final Introduction introduction,

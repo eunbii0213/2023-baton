@@ -11,7 +11,7 @@ import java.util.Optional;
 public interface OauthRunnerRepository extends JpaRepository<Runner, Long> {
 
     @Query("""
-        select r, r.member
+        select r, r.member, r.member.name
         from Runner r
         join fetch Member m on m.id = r.member.id
         where m.socialId = :socialId
