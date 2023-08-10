@@ -19,6 +19,7 @@ import touch.baton.domain.technicaltag.RunnerTechnicalTag;
 import touch.baton.domain.technicaltag.RunnerTechnicalTags;
 import touch.baton.domain.technicaltag.SupporterTechnicalTags;
 
+import java.util.List;
 import java.util.Objects;
 
 import static jakarta.persistence.FetchType.LAZY;
@@ -47,15 +48,17 @@ public class Runner extends BaseEntity {
 
 
     @Builder
-    private Runner( final Introduction introduction,
-                   final Member member
+    private Runner(final Introduction introduction,
+                   final Member member,
+                   final RunnerTechnicalTags runnerTechnicalTags
     ) {
-        this(null, introduction, member);
+        this(null, introduction, member, runnerTechnicalTags);
     }
 
     private Runner(final Long id,
                    final Introduction introduction,
-                   final Member member
+                   final Member member,
+                   final RunnerTechnicalTags runnerTechnicalTags
     ) {
         validateNotNull(member);
         this.id = id;
@@ -67,6 +70,10 @@ public class Runner extends BaseEntity {
         if (Objects.isNull(member)) {
             throw new RunnerDomainException("Runner 의 member 는 null 일 수 없습니다.");
         }
+    }
+
+    public void addAll(final List<RunnerTechnicalTag> runnerTechnicalTags) {
+        runnerTechnicalTags.addAll(runnerTechnicalTags);
     }
 
     @Override
