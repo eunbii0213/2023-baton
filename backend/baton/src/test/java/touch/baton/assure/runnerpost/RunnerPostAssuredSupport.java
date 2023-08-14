@@ -119,16 +119,6 @@ public class RunnerPostAssuredSupport {
             return this;
         }
 
-        public RunnerPostClientRequestBuilder 전체_러너_게시글_페이징을_조회한다(final Pageable 페이징_정보) {
-            final Map<String, Object> queryParams = Map.of(
-                    "size", 페이징_정보.getPageSize(),
-                    "page", 페이징_정보.getPageNumber()
-            );
-
-            response = AssuredSupport.get("/api/v1/posts/runner", queryParams);
-            return this;
-        }
-
         public RunnerPostClientRequestBuilder 서포터가_리뷰를_완료하고_리뷰완료_버튼을_누른다(final Long 게시글_식별자) {
             response = AssuredSupport.patch("/api/v1/posts/runner/{runnerPostId}/done", "runnerPostId", 게시글_식별자, accessToken);
             return this;
